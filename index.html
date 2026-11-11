@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101c24">
+    <title>The Lost Lab | Escape Room</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="game-shell">
+        <header class="topbar">
+            <a class="brand" href="#">
+                <span class="brand-icon">✧</span>
+                THE LOST LAB
+            </a>
+            <div class="top-status">
+                <span class="live-dot"></span>
+                EXPERIMENT 07 · ACTIVE
+            </div>
+            <button class="restart-btn" id="restartBtn">↻ Restart</button>
+        </header>
+
+        <main>
+            <section class="intro">
+                <div>
+                    <p class="eyebrow">CLASSIFIED FACILITY / SECTOR 07</p>
+                    <h1>Find your way <span>out.</span></h1>
+                    <p class="subtitle">Three puzzles stand between you and freedom. The clock is ticking.</p>
+                </div>
+                <div class="timer-card">
+                    <span class="timer-label">TIME REMAINING</span>
+                    <strong id="timer">08:00</strong>
+                    <span class="timer-note">Don't waste a second</span>
+                </div>
+            </section>
+
+            <section class="game-layout">
+                <div class="scene-panel">
+                    <div class="scene-heading">
+                        <span><span class="live-dot"></span> LIVE SCENE</span>
+                        <span>ROOM 01 — RESEARCH LAB</span>
+                    </div>
+
+                    <div class="lab-scene" id="labScene">
+                        <div class="ceiling-light"></div>
+                        <div class="back-wall">
+                            <div class="wall-pipe pipe-one"></div>
+                            <div class="wall-pipe pipe-two"></div>
+                            <div class="window">
+                                <div class="window-grid"></div>
+                                <span>SECTOR 07</span>
+                            </div>
+                            <div class="wall-clock">03:14</div>
+                            <div class="warning-sign">⚠ RESTRICTED AREA</div>
+                        </div>
+
+                        <div class="monitor">
+                            <div class="monitor-screen">
+                                <span class="monitor-label">SYSTEM STATUS</span>
+                                <strong>LOCKED</strong>
+                                <div class="monitor-bars"><i></i><i></i><i></i></div>
+                            </div>
+                            <div class="monitor-stand"></div>
+                        </div>
+
+                        <div class="lab-table">
+                            <div class="table-top"></div>
+                            <div class="table-leg leg-left"></div>
+                            <div class="table-leg leg-right"></div>
+                        </div>
+
+                        <div class="drawer-object scene-object" data-object="drawer">
+                            <span class="object-emoji">🗄️</span>
+                            <span class="object-name">DESK DRAWER</span>
+                        </div>
+
+                        <div class="notebook-object scene-object" data-object="notebook">
+                            <span class="object-emoji">📓</span>
+                            <span class="object-name">NOTEBOOK</span>
+                        </div>
+
+                        <div class="microscope-object scene-object" data-object="microscope">
+                            <span class="object-emoji">🔬</span>
+                            <span class="object-name">MICROSCOPE</span>
+                        </div>
+
+                        <div class="locker-object scene-object" data-object="locker">
+                            <span class="object-emoji">🔐</span>
+                            <span class="object-name">SECURITY LOCKER</span>
+                        </div>
+
+                        <div class="exit-object scene-object" data-object="exit">
+                            <span class="exit-light"></span>
+                            <span class="object-emoji">🚪</span>
+                            <span class="object-name">EXIT DOOR</span>
+                        </div>
+
+                        <div class="floor"></div>
+                        <div class="scene-overlay"></div>
+                        <div class="scene-caption" id="sceneCaption">You wake up in a deserted research laboratory...</div>
+                    </div>
+
+                    <div class="scene-instruction">
+                        <span>⌖</span>
+                        Click on objects in the room to investigate them.
+                    </div>
+                </div>
+
+                <aside class="side-panel">
+                    <section class="panel-section">
+                        <div class="panel-title">
+                            <span>MISSION OBJECTIVE</span>
+                            <span class="small-icon">◎</span>
+                        </div>
+                        <h2 id="objectiveTitle">Escape the laboratory</h2>
+                        <p id="objectiveText">Find a clue in the notebook. It may help you unlock the desk drawer.</p>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span class="progress-label" id="progressLabel">0 / 3 PUZZLES SOLVED</span>
+                    </section>
+
+                    <section class="panel-section inventory-section">
+                        <div class="panel-title">
+                            <span>YOUR INVENTORY</span>
+                            <span class="small-icon">▣</span>
+                        </div>
+                        <div class="inventory-grid" id="inventory">
+                            <div class="empty-inventory">Your inventory is empty.</div>
+                        </div>
+                    </section>
+
+                    <section class="panel-section clue-section">
+                        <div class="panel-title">
+                            <span>DISCOVERED CLUES</span>
+                            <span class="small-icon">⌕</span>
+                        </div>
+                        <div id="clueList" class="clue-list">
+                            <p class="empty-clue">No clues discovered yet.</p>
+                        </div>
+                    </section>
+
+                    <button class="hint-btn" id="hintBtn">
+                        <span>✦</span>
+                        <span>Need a hint?</span>
+                        <span class="hint-arrow">→</span>
+                    </button>
+                </aside>
+            </section>
+
+            <section class="bottom-bar">
+                <span>THE LOST LAB <span class="muted">/ ESCAPE ROOM EXPERIENCE</span></span>
+                <span>MADE FOR THE CURIOUS <span class="muted">✦</span></span>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-backdrop hidden" id="modalBackdrop">
+        <div class="game-modal" id="gameModal" role="dialog" aria-modal="true">
+            <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+            <div class="modal-icon" id="modalIcon">🔎</div>
+            <p class="eyebrow" id="modalEyebrow">INVESTIGATION</p>
+            <h2 id="modalTitle">Something interesting...</h2>
+            <p class="modal-description" id="modalDescription"></p>
+            <div id="modalExtra"></div>
+            <div class="modal-actions" id="modalActions"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+</body>
+</html>
